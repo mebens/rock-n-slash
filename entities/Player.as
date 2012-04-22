@@ -27,7 +27,7 @@ package entities
     public static const JUMP_SPEED:Number = -160;
     public static const GRAVITY:Number = 500;
     public static const FLOAT_GRAVITY:Number = 3;
-    public static const BULLET_TIME:Number = 0.35;
+    public static const BULLET_TIME:Number = 0.25;
     public static const MELEE_TIME:Number = 0.3;
     public static var id:Player;
     
