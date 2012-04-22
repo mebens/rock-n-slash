@@ -21,7 +21,6 @@ package
       FP.screen.scale = 2;
       FP.screen.color = 0x111111;
       FP.world = new TitleScreen;
-      //FP.console.enable();
       music.loop(0.2);
       
       Input.define("left", Key.LEFT);
