@@ -24,7 +24,8 @@ package worlds
       width = xml.width;
       height = xml.height;
       
-      add(fade = new Fade)
+      add(fade = new Fade);
+      add(new Vignette);
       add(new Background);
       add(new Ground(xml, width, height));
       add(new Player(xml.objects.player.@x, xml.objects.player.@y));

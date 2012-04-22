@@ -10,6 +10,9 @@ package
     [Embed(source = "assets/music/music.mp3")]
     public static const MUSIC:Class;
     
+    [Embed(source = "assets/images/menu-bg.png")]
+    public static const MENU_BG:Class;
+    
     public var music:Sfx = new Sfx(MUSIC);
     
     public function Game()
@@ -18,7 +21,7 @@ package
       FP.screen.scale = 2;
       FP.screen.color = 0x111111;
       FP.world = new TitleScreen;
-      FP.console.enable();
+      //FP.console.enable();
       music.loop(0.2);
       
       Input.define("left", Key.LEFT);
@@ -26,6 +29,24 @@ package
       Input.define("jump", Key.Z, Key.UP);
       Input.define("shoot", Key.X);
       Input.define("melee", Key.C);
+      Input.define("music", Key.M);
+    }
+    
+    override public function update():void
+    {
+      super.update();
+      
+      if (Input.pressed("music"))
+      {
+        if (music.playing)
+        {
+          music.stop();
+        }
+        else
+        {
+          music.resume();
+        }
+      }
     }
   }
 }
