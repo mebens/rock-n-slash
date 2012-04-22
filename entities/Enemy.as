@@ -8,6 +8,21 @@ package entities
     [Embed(source = "../assets/images/enemy.png")]
     public static const IMAGE:Class;
     
+    [Embed(source = "../assets/sfx/enemy-death-1.mp3")]
+    public static const DEATH_1:Class;
+    
+    [Embed(source = "../assets/sfx/enemy-death-2.mp3")]
+    public static const DEATH_2:Class;
+    
+    [Embed(source = "../assets/sfx/enemy-death-3.mp3")]
+    public static const DEATH_3:Class;
+    
+    [Embed(source = "../assets/sfx/bullet-hit-1.mp3")]
+    public static const BULLET_HIT_1:Class;
+    
+    [Embed(source = "../assets/sfx/bullet-hit-2.mp3")]
+    public static const BULLET_HIT_2:Class;
+    
     public static const SPEED:Number = 70;
     public static const GRAVITY:Number = 500;
     
@@ -15,7 +30,13 @@ package entities
     public var velY:Number = 0;
     public var health:int = 2;
     public var dead:Boolean = false;
+    
     public var map:Spritemap;
+    public var deathSfx1:Sfx = new Sfx(DEATH_1);
+    public var deathSfx2:Sfx = new Sfx(DEATH_2);
+    public var deathSfx3:Sfx = new Sfx(DEATH_3);
+    public var bulletHitSfx1:Sfx = new Sfx(BULLET_HIT_1);
+    public var bulletHitSfx2:Sfx = new Sfx(BULLET_HIT_2);
     
     public function Enemy(x:int, y:int, direction:int = 1)
     {
@@ -25,12 +46,14 @@ package entities
       layer = 1;
       collidable = false;
       xAxis = direction;
+      tween = new ColorTween(colorComplete);
+      
       graphic = map = new Spritemap(IMAGE, 9, 12);
       map.add("walk", [0, 1, 2, 3, 4], 15);
       map.add("die", [7, 8, 9, 10, 11, 12, 13], 25, false);
       map.add("spawn", [13, 12, 11, 10, 9, 8, 7], 30, false);
       map.play("spawn");
-      map.flipped = xAxis == -1;
+      map.flipped = xAxis == -1;      
     }
     
     override public function update():void
@@ -75,7 +98,16 @@ package entities
       if (bullet)
       {
         bullet.die();
-        if (--health <= 0) die();
+        
+        if (--health <= 0)
+        {
+          die();
+        }
+        else
+        {
+          playSfx([bulletHitSfx1, bulletHitSfx2]);
+          tween.tween(0.15, 0xFFFFFF, 0xFF0000);
+        }
       }
     }
     
@@ -103,6 +135,7 @@ package entities
         dead = true;
         collidable = false;
         map.play("die");
+        playSfx([deathSfx1, deathSfx2, deathSfx3], 0.4);
         
         var score:uint = 10;
         

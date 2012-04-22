@@ -8,11 +8,15 @@ package worlds
     [Embed(source = "../assets/world.oel", mimeType = "application/octet-stream")]
     public static const DATA:Class;
     
+    [Embed(source = "../assets/sfx/game-over.mp3")]
+    public static const GAME_OVER:Class;
+    
     public var width:uint;
     public var height:uint;
     public var score:uint = 0;
     public var over:Boolean = false;
     public var fade:Fade;
+    public var gameOverSfx:Sfx = new Sfx(GAME_OVER);
     
     public function GameWorld()
     {
@@ -35,6 +39,7 @@ package worlds
     public function gameOver():void
     {
       over = true;
+      gameOverSfx.play();
       fade.fadeIn(1, fadeComplete);
     }
     

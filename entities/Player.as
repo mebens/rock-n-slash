@@ -10,6 +10,18 @@ package entities
     [Embed(source = "../assets/images/player.png")]
     public static const IMAGE:Class;
     
+    [Embed(source = "../assets/sfx/shoot-1.mp3")]
+    public static const SHOOT_1:Class;
+
+    [Embed(source = "../assets/sfx/shoot-2.mp3")]
+    public static const SHOOT_2:Class;
+
+    [Embed(source = "../assets/sfx/melee-1.mp3")]
+    public static const MELEE_1:Class;
+    
+    [Embed(source = "../assets/sfx/melee-2.mp3")]
+    public static const MELEE_2:Class;
+    
     public static const ACCELERATION:Number = 1180;
     public static const FRICTION:Number = .82;
     public static const JUMP_SPEED:Number = -160;
@@ -23,7 +35,12 @@ package entities
     public var bulletTimer:Number = 0;
     public var meleeTimer:Number = 0;
     public var inAir:Boolean = false;
+    
     public var map:Spritemap;
+    public var shootSfx1:Sfx = new Sfx(SHOOT_1);
+    public var shootSfx2:Sfx = new Sfx(SHOOT_2);
+    public var meleeSfx1:Sfx = new Sfx(MELEE_1);
+    public var meleeSfx2:Sfx = new Sfx(MELEE_2);
     
     public function Player(x:int, y:int)
     {
@@ -99,6 +116,7 @@ package entities
         var enemy:Enemy = world.collideRect("enemy", x + (map.flipped ? -15 : width), y, 15, height) as Enemy;
         if (enemy) enemy.meleeHit(); 
         map.play("melee");
+        playSfx([meleeSfx1, meleeSfx2]);
       }
       
       // shooting
@@ -110,6 +128,7 @@ package entities
       {
         bulletTimer += BULLET_TIME;
         world.add(new Bullet(x + (map.flipped ? 0 : width), y + 9, map.flipped ? -1 : 1));
+        playSfx([shootSfx1, shootSfx2]);
       }
     }
     
