@@ -27,14 +27,22 @@ package entities
     public static const JUMP_SPEED:Number = -160;
     public static const GRAVITY:Number = 500;
     public static const FLOAT_GRAVITY:Number = 3;
+    
     public static const BULLET_TIME:Number = 0.25;
     public static const MELEE_TIME:Number = 0.3;
+    public static const FLASH_TIME:Number = 0.1;
+    
     public static var id:Player;
     
     public var vel:Point = new Point;
     public var bulletTimer:Number = 0;
     public var meleeTimer:Number = 0;
     public var inAir:Boolean = false;
+    
+    public var secondChance:Boolean = true;
+    public var flashing:Boolean = false;
+    public var flashReps:uint = 12;
+    public var flashTimer:Number = 0;
     
     public var map:Spritemap;
     public var shootSfx1:Sfx = new Sfx(SHOOT_1);
@@ -54,6 +62,7 @@ package entities
       map.play("stand");
     }
     
+    // yeah, this function is huge
     override public function update():void
     {
       if (gameWorld.over)
@@ -85,8 +94,52 @@ package entities
       moveBy(vel.x * FP.elapsed, vel.y * FP.elapsed, "solid");
       
       if (vel.x == 0) xAxis = 0;
-      if (y > gameWorld.height || collide("enemy", x, y)) die();
+      if (y > gameWorld.height) die();
       
+      // second chance flashing
+      if (flashing)
+      {
+        if (flashReps > 0)
+        {
+          if (flashTimer > 0)
+          {
+            flashTimer -= FP.elapsed;
+          }
+          else
+          {
+            flashReps--;
+            flashTimer += FLASH_TIME;
+            visible = !visible;
+          }
+        }
+        else
+        {
+          flashing = false;
+          collidable = true;
+        }
+      }
+      else
+      {
+        // enemy collision
+        var enemy:Enemy = collide("enemy", x, y) as Enemy;
+
+        if (enemy)
+        {
+          if (secondChance)
+          {
+            secondChance = false;
+            flashing = true;
+            collidable = false;
+            enemy.die(3);
+          }
+          else
+          {
+            die();
+          }
+        }
+      }
+      
+      // spritemap
       if (xAxis != 0)
       {
         map.flipped = xAxis == -1;
@@ -113,7 +166,7 @@ package entities
       else if (Input.pressed("melee"))
       {
         meleeTimer += MELEE_TIME;
-        var enemy:Enemy = world.collideRect("enemy", x + (map.flipped ? -15 : width), y, 15, height) as Enemy;
+        enemy = world.collideRect("enemy", x + (map.flipped ? -15 : width), y, 15, height) as Enemy;
         if (enemy) enemy.meleeHit(); 
         map.play("melee");
         playSfx([meleeSfx1, meleeSfx2]);

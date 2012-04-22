@@ -87,7 +87,7 @@ package entities
       var inAir:Boolean = collide("solid", x, y + 1) == null;
       if (inAir) velY += GRAVITY * FP.elapsed;
       moveBy(xAxis * SPEED * FP.elapsed, velY * FP.elapsed);
-      if (y > gameWorld.height) die(false, false);
+      if (y > gameWorld.height) die(2);
       
       if (collide("barrier", x, y))
       {
@@ -103,7 +103,7 @@ package entities
         
         if (--health <= 0)
         {
-          die();
+          die(0);
         }
         else
         {
@@ -126,31 +126,35 @@ package entities
     
     public function meleeHit():void
     {
-      die(true);
+      die(1);
     }
     
-    public function die(melee:Boolean = false, player:Boolean = true):void
+    // Type: 0 = bullet, 1 = melee, 2 = fall, 3 = second chance
+    public function die(type:uint = 0):void
     {
-      if (player)
+      if (type == 2)
+      {
+        world.remove(this);
+      }
+      else
       {
         dead = true;
         collidable = false;
         map.play("die");
         playSfx([deathSfx1, deathSfx2, deathSfx3], 0.4);
         
-        var score:uint = 10;
-        
-        if (melee)
+        if (type != 3)
         {
-          score += health == 1 ? 2 : 5;
-          if (Player.id.inAir) score += 5;
-        }
-        
-        gameWorld.addScore(score, this);
-      }
-      else
-      {
-        world.remove(this);
+          var score:uint = 10;
+
+          if (type == 1)
+          {
+            score += health == 1 ? 2 : 5;
+            if (Player.id.inAir) score += 5;
+          }
+
+          gameWorld.addScore(score, this);
+        }  
       }
     }
   }
