@@ -21,7 +21,7 @@ package entities
       setHitbox(9, 12);
       type = "spawner";
       this.direction = direction;
-      FP.tween(this, { time: 1.5, seqChance: 5 }, 90, { tweener: this });
+      FP.tween(this, { time: 1.5, seqChance: 5 }, 60, { tweener: this });
       FP.alarm(45, increaseSeqReps, Tween.ONESHOT, this);
     }
     

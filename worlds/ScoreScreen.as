@@ -2,6 +2,7 @@ package worlds
 {
   import net.flashpunk.*;
   import net.flashpunk.graphics.Text;
+  import net.flashpunk.utils.Data;
   import net.flashpunk.utils.Input;
   import entities.Fade;
   
@@ -11,14 +12,29 @@ package worlds
     
     public function ScoreScreen(s:uint)
     {
+      Data.load();
+      var highscore:uint = Data.readUint("highscore");
+      
+      if (s > highscore)
+      {
+        Data.writeUint("highscore", s);
+        Data.save();
+      }
+      
       var score:Text = new Text(String(s), 0, 0, { size: 24 });
-      score.x = -score.textWidth / 2;
-      score.y = -score.textHeight / 2;
-      addGraphic(score, 0, FP.width / 2, FP.height / 2.25);
+      score.x = FP.width / 2 - score.textWidth / 2;
+      score.y = FP.height / 2.25 - score.textHeight / 2;
+      addGraphic(score);
+      
+      var hs:Text = new Text(s > highscore ? "You beat your old highscore of " + highscore + "!" : "Highscore: " + highscore, 0, 0, { size: 8 });
+      hs.x = FP.width / 2 - hs.textWidth / 2;
+      hs.y = score.y + score.textHeight;
+      addGraphic(hs)
       
       var instructions:Text = new Text("Press Z to restart", 0, 0, { size: 8 });
-      instructions.x = -instructions.textWidth / 2;
-      addGraphic(instructions, 0, FP.width / 2, FP.height / 2.25 + score.textHeight - 5);
+      instructions.x = FP.width / 2 - instructions.textWidth / 2;
+      instructions.y = hs.y + 50;
+      addGraphic(instructions);
       
       add(fade = new Fade);
       fade.fadeOut();
