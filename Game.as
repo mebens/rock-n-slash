@@ -7,6 +7,11 @@ package
   
   public class Game extends Engine
   {
+    [Embed(source = "assets/music/music.mp3")]
+    public static const MUSIC:Class;
+    
+    public var music:Sfx = new Sfx(MUSIC);
+    
     public function Game()
     {
       super(350, 210);
@@ -14,6 +19,7 @@ package
       FP.screen.color = 0x111111;
       FP.world = new TitleScreen;
       FP.console.enable();
+      music.loop(0.2);
       
       Input.define("left", Key.LEFT);
       Input.define("right", Key.RIGHT);

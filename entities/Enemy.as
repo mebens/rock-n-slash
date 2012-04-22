@@ -46,7 +46,6 @@ package entities
       layer = 1;
       collidable = false;
       xAxis = direction;
-      tween = new ColorTween(colorComplete);
       
       graphic = map = new Spritemap(IMAGE, 9, 12);
       map.add("walk", [0, 1, 2, 3, 4], 15);
@@ -106,7 +105,6 @@ package entities
         else
         {
           playSfx([bulletHitSfx1, bulletHitSfx2]);
-          tween.tween(0.15, 0xFFFFFF, 0xFF0000);
         }
       }
     }
