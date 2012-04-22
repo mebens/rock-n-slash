@@ -1,0 +1,106 @@
+<level>
+  <width>350</width>
+  <height>210</height>
+  <ground set="tiles">
+    <tile id="0" x="104" y="117"/>
+    <tile id="0" x="117" y="117"/>
+    <tile id="0" x="156" y="117"/>
+    <tile id="0" x="130" y="117"/>
+    <tile id="0" x="143" y="117"/>
+    <tile id="0" x="182" y="130"/>
+    <tile id="0" x="169" y="117"/>
+    <tile id="0" x="182" y="117"/>
+    <tile id="0" x="208" y="117"/>
+    <tile id="0" x="65" y="117"/>
+    <tile id="0" x="234" y="117"/>
+    <tile id="0" x="260" y="117"/>
+    <tile id="0" x="247" y="130"/>
+    <tile id="0" x="234" y="130"/>
+    <tile id="0" x="208" y="130"/>
+    <tile id="0" x="195" y="143"/>
+    <tile id="0" x="182" y="156"/>
+    <tile id="0" x="169" y="143"/>
+    <tile id="0" x="169" y="156"/>
+    <tile id="0" x="156" y="156"/>
+    <tile id="0" x="143" y="156"/>
+    <tile id="0" x="130" y="156"/>
+    <tile id="0" x="130" y="143"/>
+    <tile id="0" x="117" y="143"/>
+    <tile id="0" x="104" y="143"/>
+    <tile id="0" x="78" y="117"/>
+    <tile id="1" x="130" y="130"/>
+    <tile id="1" x="143" y="143"/>
+    <tile id="1" x="143" y="130"/>
+    <tile id="1" x="247" y="117"/>
+    <tile id="1" x="78" y="130"/>
+    <tile id="1" x="91" y="143"/>
+    <tile id="1" x="156" y="169"/>
+    <tile id="1" x="169" y="169"/>
+    <tile id="2" x="52" y="104"/>
+    <tile id="2" x="91" y="104"/>
+    <tile id="3" x="78" y="104"/>
+    <tile id="3" x="65" y="104"/>
+    <tile id="2" x="117" y="104"/>
+    <tile id="2" x="130" y="104"/>
+    <tile id="2" x="169" y="104"/>
+    <tile id="2" x="182" y="104"/>
+    <tile id="2" x="221" y="104"/>
+    <tile id="2" x="234" y="104"/>
+    <tile id="2" x="247" y="104"/>
+    <tile id="2" x="286" y="104"/>
+    <tile id="3" x="104" y="104"/>
+    <tile id="3" x="156" y="104"/>
+    <tile id="3" x="143" y="104"/>
+    <tile id="3" x="195" y="104"/>
+    <tile id="3" x="208" y="104"/>
+    <tile id="3" x="260" y="104"/>
+    <tile id="2" x="273" y="104"/>
+    <tile id="4" x="39" y="104"/>
+    <tile id="5" x="299" y="104"/>
+    <tile id="6" x="52" y="117"/>
+    <tile id="8" x="65" y="130"/>
+    <tile id="6" x="65" y="143"/>
+    <tile id="10" x="78" y="143"/>
+    <tile id="6" x="91" y="156"/>
+    <tile id="6" x="130" y="169"/>
+    <tile id="6" x="156" y="182"/>
+    <tile id="11" x="169" y="182"/>
+    <tile id="7" x="247" y="143"/>
+    <tile id="7" x="260" y="130"/>
+    <tile id="7" x="286" y="117"/>
+    <tile id="11" x="273" y="117"/>
+    <tile id="10" x="234" y="143"/>
+    <tile id="11" x="143" y="169"/>
+    <tile id="11" x="104" y="156"/>
+    <tile id="10" x="117" y="156"/>
+    <tile id="1" x="182" y="143"/>
+    <tile id="1" x="156" y="143"/>
+    <tile id="1" x="169" y="130"/>
+    <tile id="1" x="156" y="130"/>
+    <tile id="0" x="221" y="130"/>
+    <tile id="0" x="195" y="130"/>
+    <tile id="0" x="221" y="117"/>
+    <tile id="1" x="195" y="117"/>
+    <tile id="0" x="104" y="130"/>
+    <tile id="1" x="117" y="130"/>
+    <tile id="1" x="91" y="117"/>
+    <tile id="1" x="91" y="130"/>
+    <tile id="0" x="195" y="156"/>
+    <tile id="1" x="208" y="143"/>
+    <tile id="10" x="182" y="182"/>
+    <tile id="7" x="195" y="182"/>
+    <tile id="7" x="208" y="169"/>
+    <tile id="7" x="221" y="156"/>
+    <tile id="0" x="182" y="169"/>
+    <tile id="0" x="195" y="169"/>
+    <tile id="1" x="208" y="156"/>
+    <tile id="1" x="221" y="143"/>
+  </ground>
+  <objects>
+    <player x="171" y="89"/>
+    <enemySpawner x="45" y="92" direction="1"/>
+    <enemySpawner x="296" y="92" direction="-1"/>
+    <barrier x="39" y="92"/>
+    <barrier x="307" y="92"/>
+  </objects>
+</level>

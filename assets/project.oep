@@ -1,0 +1,40 @@
+<project>
+  <name>Ludum Dare 23</name>
+  
+  <settings>
+    <defaultWidth>350</defaultWidth>
+    <defaultHeight>210</defaultHeight>
+    <minWidth>350</minWidth>
+    <minHeight>210</minHeight>
+    <maxWidth>25600</maxWidth>
+    <maxHeight>25600</maxHeight>
+    <bgColor>0x111111</bgColor>
+    <workingDirectory>images</workingDirectory>
+  </settings>
+  
+  <tilesets>
+    <tileset name="tiles" image="tiles.png" tileWidth="13" tileHeight="13" />
+  </tilesets>
+  
+  <objects>
+    <object name="player" image="player.png" width="11" height="15" limit="1" imageWidth="11" imageHeight="15" />
+    <object name="barrier" image="barrier.png" width="5" height="12" />
+    
+    <object name="enemySpawner" image="enemy.png" width="9" height="12">
+      <values>
+        <integer name="direction" default="1" />
+      </values>
+    </object>
+    
+    <object name="enemy" image="enemy.png" width="9" height="12">
+      <values>
+        <integer name="direction" default="1" />
+      </values>
+    </object>
+  </objects>
+  
+  <layers>
+    <tiles name="ground" gridSize="13" gridColor="33FFFFFF" exportTileIDs="true" />
+    <objects name="objects" gridSize="1" drawGridSize="13" gridColor="33FFFFFF" />
+  </layers>
+</project>
