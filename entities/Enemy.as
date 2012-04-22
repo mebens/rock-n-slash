@@ -5,8 +5,11 @@ package entities
   
   public class Enemy extends GameEntity
   {
-    [Embed(source = "../assets/images/enemy.png")]
-    public static const IMAGE:Class;
+    [Embed(source = "../assets/images/enemy-red.png")]
+    public static const RED:Class;
+    
+    [Embed(source = "../assets/images/enemy-green.png")]
+    public static const GREEN:Class;
     
     [Embed(source = "../assets/sfx/enemy-death-1.mp3")]
     public static const DEATH_1:Class;
@@ -47,7 +50,7 @@ package entities
       collidable = false;
       xAxis = direction;
       
-      graphic = map = new Spritemap(IMAGE, 9, 12);
+      graphic = map = new Spritemap(FP.rand(3) == 0 ? GREEN : RED, 9, 12);
       map.add("walk", [0, 1, 2, 3, 4], 15);
       map.add("die", [7, 8, 9, 10, 11, 12, 13], 25, false);
       map.add("spawn", [13, 12, 11, 10, 9, 8, 7], 30, false);

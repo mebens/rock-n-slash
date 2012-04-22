@@ -4,13 +4,13 @@ package entities
   
   public class EnemySpawner extends GameEntity
   {
-    public var time:Number = 2.5;
-    public var timeRange:Number = 0.3;    
+    public var time:Number = 2.8;
+    public var timeRange:Number = 0.2;
     public var timer:Number = 1.5;
     
     public var seqReps:uint = 2;
     public var seqRepCounter:uint = seqReps;
-    public var seqChance:uint = 10;
+    public var seqChance:uint = 12;
     public var seqRunning:Boolean = false;
     
     public var direction:int;
@@ -21,8 +21,8 @@ package entities
       setHitbox(9, 12);
       type = "spawner";
       this.direction = direction;
-      FP.tween(this, { time: 1.5, seqChance: 5 }, 60, { tweener: this });
-      FP.alarm(45, increaseSeqReps, Tween.ONESHOT, this);
+      FP.tween(this, { time: 1.5, seqChance: 5 }, 90, { tweener: this });
+      FP.alarm(75, increaseSeqReps, Tween.ONESHOT, this);
     }
     
     override public function update():void

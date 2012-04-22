@@ -15,7 +15,7 @@ package worlds
     
     public function TitleScreen()
     {
-      title = new Text("Lorem Ipsum", 0, 0, { size: 24 });
+      title = new Text("Rock 'n' Slash", 0, 0, { size: 24 });
       title.x = -title.textWidth / 2;
       addGraphic(title, 0, FP.width / 2, 50);
       
