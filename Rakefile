@@ -10,3 +10,8 @@ end
 task :play do
   `open -a "Flash Player" _bin/game.swf`
 end
+
+task :lines do
+  puts `wc -l entities/* worlds/* Game.as`
+end
+
