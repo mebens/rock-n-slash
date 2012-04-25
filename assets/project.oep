@@ -18,15 +18,15 @@
   
   <objects>
     <object name="player" image="player.png" width="11" height="15" limit="1" imageWidth="11" imageHeight="15" />
-    <object name="barrier" image="barrier.png" width="5" height="12" />
+    <object name="barrier" image="barrier.png" width="1" height="12" resizableX="true" resizableY="true" />
     
-    <object name="enemySpawner" image="enemy.png" width="9" height="12">
+    <object name="enemySpawner" image="enemy-red.png" width="9" height="12" imageWidth="9" imageHeight="12">
       <values>
         <integer name="direction" default="1" />
       </values>
     </object>
     
-    <object name="enemy" image="enemy.png" width="9" height="12">
+    <object name="enemy" image="enemy-red.png" width="9" height="12" imageWidth="9" imageHeight="12">
       <values>
         <integer name="direction" default="1" />
       </values>

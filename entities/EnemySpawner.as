@@ -4,16 +4,21 @@ package entities
   
   public class EnemySpawner extends GameEntity
   {
-    public var time:Number = 2.8;
-    public var timeRange:Number = 0.2;
+    public var time:Number = 2.2;
+    public var timeRange:Number = 0.1;
     public var timer:Number = 1.5;
     
     public var seqReps:uint = 2;
     public var seqRepCounter:uint = seqReps;
-    public var seqChance:uint = 12;
+    public var seqChance:uint = 10;
     public var seqRunning:Boolean = false;
     
     public var direction:int;
+    
+    public static function fromXML(o:Object):EnemySpawner
+    {
+      return new EnemySpawner(o.@x, o.@y, o.@direction);
+    }
     
     public function EnemySpawner(x:int, y:int, direction:int = 1)
     {

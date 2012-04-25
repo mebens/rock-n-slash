@@ -98,9 +98,9 @@
   </ground>
   <objects>
     <player x="171" y="89"/>
-    <enemySpawner x="45" y="92" direction="1"/>
-    <enemySpawner x="296" y="92" direction="-1"/>
-    <barrier x="39" y="92"/>
-    <barrier x="307" y="92"/>
+    <enemySpawner x="41" y="92" direction="1"/>
+    <enemySpawner x="301" y="92" direction="-1"/>
+    <barrier x="39" y="92" width="2" height="12"/>
+    <barrier x="310" y="92" width="2" height="12"/>
   </objects>
 </level>

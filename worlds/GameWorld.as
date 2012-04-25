@@ -28,13 +28,18 @@ package worlds
       add(new Vignette);
       add(new Background);
       add(new Ground(xml, width, height));
-      add(new Player(xml.objects.player.@x, xml.objects.player.@y));
       add(new ScoreDisplay);
-      for each (var o:Object in xml.objects.enemySpawner) add(new EnemySpawner(o.@x, o.@y, o.@direction));
-      for each (o in xml.objects.enemy) add(new Enemy(o.@x, o.@y, o.@direction));
-      for each (o in xml.objects.barrier) add(new EnemyBarrier(o.@x, o.@y));
-      
+      loadObjects(xml);      
       fade.fadeOut();
+    }
+    
+    public function loadObjects(xml:XML):void
+    {
+      var o:Object;
+      add(Player.fromXML(xml.objects.player));
+      for each (o in xml.objects.enemySpawner) add(EnemySpawner.fromXML(o));
+      for each (o in xml.objects.enemy) add(Enemy.fromXML(o));
+      for each (o in xml.objects.barrier) add(EnemyBarrier.fromXML(o));
     }
     
     public function gameOver():void

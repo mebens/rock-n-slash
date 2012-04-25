@@ -50,6 +50,11 @@ package entities
     public var meleeSfx1:Sfx = new Sfx(MELEE_1);
     public var meleeSfx2:Sfx = new Sfx(MELEE_2);
     
+    public static function fromXML(o:Object):Player
+    {
+      return new Player(o.@x, o.@y);
+    }
+    
     public function Player(x:int, y:int)
     {
       id = this;
@@ -177,7 +182,7 @@ package entities
       {
         bulletTimer -= FP.elapsed;
       }
-      else if (meleeTimer <= 0 && Input.pressed("shoot"))
+      else if (meleeTimer <= MELEE_TIME / 2 && Input.pressed("shoot"))
       {
         bulletTimer += BULLET_TIME;
         world.add(new Bullet(x + (map.flipped ? 0 : width), y + 9, map.flipped ? -1 : 1));

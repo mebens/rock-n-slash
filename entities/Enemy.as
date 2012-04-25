@@ -41,6 +41,11 @@ package entities
     public var bulletHitSfx1:Sfx = new Sfx(BULLET_HIT_1);
     public var bulletHitSfx2:Sfx = new Sfx(BULLET_HIT_2);
     
+    public static function fromXML(o:Object):Enemy
+    {
+      return new Enemy(o.@x, o.@y, o.@direction);
+    }
+    
     public function Enemy(x:int, y:int, direction:int = 1)
     {
       super(x, y);
@@ -132,13 +137,15 @@ package entities
     // Type: 0 = bullet, 1 = melee, 2 = fall, 3 = second chance
     public function die(type:uint = 0):void
     {
+      if (dead) return;
+      dead = true;
+      
       if (type == 2)
       {
         world.remove(this);
       }
       else
       {
-        dead = true;
         collidable = false;
         map.play("die");
         playSfx([deathSfx1, deathSfx2, deathSfx3], 0.4);
