@@ -8,10 +8,12 @@ package entities
     [Embed(source = "../assets/images/bg.png")]
     public static const IMAGE:Class;
     
+    public static var id:Background;
     public var image:Image = new Image(IMAGE);
     
     public function Background()
     {
+      id = this;
       graphic = image;
       layer = 3;
     }

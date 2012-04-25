@@ -4,9 +4,9 @@ package entities
   
   public class EnemySpawner extends GameEntity
   {
-    public var time:Number = 2.2;
+    public var time:Number = 2.5;
     public var timeRange:Number = 0.1;
-    public var timer:Number = 1.5;
+    public var timer:Number = 1.8;
     
     public var seqReps:uint = 2;
     public var seqRepCounter:uint = seqReps;
@@ -32,7 +32,7 @@ package entities
     
     override public function update():void
     {
-      if (gameWorld.over) return;
+      if (gameWorld.paused) return;
 
       if (timer > 0)
       {

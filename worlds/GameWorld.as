@@ -1,6 +1,7 @@
 package worlds
 {
   import net.flashpunk.*;
+  import net.flashpunk.utils.Input;
   import entities.*;
   
   public class GameWorld extends World
@@ -14,7 +15,7 @@ package worlds
     public var width:uint;
     public var height:uint;
     public var score:uint = 0;
-    public var over:Boolean = false;
+    public var paused:Boolean = false;
     public var fade:Fade;
     public var gameOverSfx:Sfx = new Sfx(GAME_OVER);
     
@@ -25,12 +26,24 @@ package worlds
       height = xml.height;
       
       add(fade = new Fade);
+      add(new PauseDisplay);
       add(new Vignette);
       add(new Background);
       add(new Ground(xml, width, height));
       add(new ScoreDisplay);
       loadObjects(xml);      
       fade.fadeOut();
+    }
+    
+    override public function update():void
+    {
+      super.update();
+      
+      if (Input.pressed("pause"))
+      {
+        paused = !paused;
+        PauseDisplay.id.visible = !PauseDisplay.id.visible;
+      }
     }
     
     public function loadObjects(xml:XML):void
@@ -44,7 +57,7 @@ package worlds
     
     public function gameOver():void
     {
-      over = true;
+      paused = true;
       gameOverSfx.play();
       fade.fadeIn(1, fadeComplete);
     }

@@ -17,17 +17,19 @@ package entities
       super(enemy.x + enemy.width / 2, enemy.y);
       layer = -1;
       
-      shadow = new Text("+" + score, 0, 0, { size: 8, color: 0x111111 });
-      shadow.x = -shadow.textWidth / 2 + 1;
-      shadow.y = -shadow.textHeight + 1;
-      FP.tween(shadow, { y: shadow.y - DISTANCE, alpha: 0 }, TIME, { ease: Ease.quadOut, complete: tweenComplete, tweener: this });
-      addGraphic(shadow);
-      
-      text = new Text("+" + score, 0, 0, { size: 8 });
+      var options:Object = { size: 8 };
+      text = new Text("+" + score, 0, 0, options);
       text.x = -text.textWidth / 2;
       text.y = -text.textHeight;
-      FP.tween(text, { y: text.y - DISTANCE, alpha: 0 }, TIME, { ease: Ease.quadOut, complete: tweenComplete, tweener: this });
+      addGraphic(shadow = getShadow(text, options));
       addGraphic(text);
+      tweenText(text);
+      tweenText(shadow);
+    }
+    
+    public function tweenText(text:Text):void
+    {
+      FP.tween(text, { y: text.y - DISTANCE, alpha: 0 }, TIME, { ease: Ease.quadOut, complete: tweenComplete, tweener: this });
     }
     
     public function tweenComplete():void

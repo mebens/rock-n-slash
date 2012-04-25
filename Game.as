@@ -30,6 +30,7 @@ package
       Input.define("shoot", Key.X);
       Input.define("melee", Key.C);
       Input.define("music", Key.M);
+      Input.define("pause", Key.ESCAPE, Key.P)
     }
     
     override public function update():void

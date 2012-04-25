@@ -65,7 +65,7 @@ package entities
     
     override public function update():void
     {
-      if (gameWorld.over)
+      if (gameWorld.paused)
       {
         map.active = false;
         return;

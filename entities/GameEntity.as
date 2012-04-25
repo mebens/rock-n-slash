@@ -1,6 +1,7 @@
 package entities
 {
   import net.flashpunk.*;
+  import net.flashpunk.graphics.Text;
   import worlds.GameWorld;
   
   public class GameEntity extends Entity
