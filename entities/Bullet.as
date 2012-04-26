@@ -25,7 +25,7 @@ package entities
     override public function update():void
     {
       x += vel * FP.elapsed;
-      if (x < -width || x > gameWorld.width + width) world.remove(this);
+      if (x < -width || x > island.width + width) world.remove(this);
     }
     
     public function die():void

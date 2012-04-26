@@ -28,7 +28,7 @@ package entities
     public static const GRAVITY:Number = 500;
     public static const FLOAT_GRAVITY:Number = 3;
     
-    public static const BULLET_TIME:Number = 0.25;
+    public static const BULLET_TIME:Number = 0.3;
     public static const MELEE_TIME:Number = 0.3;
     public static const FLASH_TIME:Number = 0.1;
     
@@ -37,6 +37,7 @@ package entities
     public var vel:Point = new Point;
     public var bulletTimer:Number = 0;
     public var meleeTimer:Number = 0;
+    public var shootQueued:Boolean = false;
     public var inAir:Boolean = false;
     
     public var secondChance:Boolean = true;
@@ -67,15 +68,15 @@ package entities
       map.play("stand");
     }
     
+    override public function added():void
+    {
+      island.addListener("paused,gameOver", pauseMap);
+    }
+    
     // yeah, this function is huge
     override public function update():void
     {
-      if (gameWorld.paused)
-      {
-        map.active = false;
-        return;
-      }
-      
+      if (island.paused) return;
       inAir = collide("solid", x, y + 1) == null;
       
       if (inAir)
@@ -99,7 +100,7 @@ package entities
       moveBy(vel.x * FP.elapsed, vel.y * FP.elapsed, "solid");
       
       if (vel.x == 0) xAxis = 0;
-      if (y > gameWorld.height) die();
+      if (y > island.height) die();
       
       // second chance flashing
       if (flashing)
@@ -136,6 +137,7 @@ package entities
             flashing = true;
             collidable = false;
             enemy.die(3);
+            island.endCombo();
           }
           else
           {
@@ -180,10 +182,12 @@ package entities
       // shooting
       if (bulletTimer > 0)
       {
+        if (Input.pressed("shoot")) shootQueued = true;
         bulletTimer -= FP.elapsed;
       }
-      else if (meleeTimer <= MELEE_TIME / 2 && Input.pressed("shoot"))
+      else if (meleeTimer <= MELEE_TIME / 2 && (shootQueued || Input.pressed("shoot")))
       {
+        shootQueued = false;
         bulletTimer += BULLET_TIME;
         world.add(new Bullet(x + (map.flipped ? 0 : width), y + 9, map.flipped ? -1 : 1));
         playSfx([shootSfx1, shootSfx2]);
@@ -204,7 +208,12 @@ package entities
     
     public function die():void
     {
-      gameWorld.gameOver();
+      island.gameOver();
+    }
+    
+    public function pauseMap():void
+    {
+      map.active = !map.active;
     }
   }
 }

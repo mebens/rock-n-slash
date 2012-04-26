@@ -55,7 +55,7 @@ package worlds
     
     public function fadeComplete():void
     {
-      FP.world = new GameWorld;
+      FP.world = new Island;
     }
   }
 }

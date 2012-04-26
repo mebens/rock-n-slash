@@ -2,7 +2,7 @@ package entities
 {
   import net.flashpunk.*;
   import net.flashpunk.graphics.Text;
-  import worlds.GameWorld;
+  import worlds.Island;
   
   public class GameEntity extends Entity
   {
@@ -17,9 +17,9 @@ package entities
       sfx.play(volume);
     }
     
-    public function get gameWorld():GameWorld
+    public function get island():Island
     {
-      return world as GameWorld;
+      return world as Island;
     }
   }
 }

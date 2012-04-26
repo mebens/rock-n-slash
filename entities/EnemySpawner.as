@@ -32,7 +32,7 @@ package entities
     
     override public function update():void
     {
-      if (gameWorld.paused) return;
+      if (island.paused) return;
 
       if (timer > 0)
       {

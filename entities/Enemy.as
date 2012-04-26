@@ -63,14 +63,15 @@ package entities
       map.flipped = xAxis == -1;      
     }
     
+    override public function added():void
+    {
+      island.addListener("paused,gameOver", pauseMap);
+    }
+    
     override public function update():void
     {
-      if (gameWorld.paused)
-      {
-        map.active = false;
-        return;
-      }
-
+      if (island.paused) return;
+      
       if (dead)
       {
         if (map.complete) world.remove(this);
@@ -92,7 +93,7 @@ package entities
       var inAir:Boolean = collide("solid", x, y + 1) == null;
       if (inAir) velY += GRAVITY * FP.elapsed;
       moveBy(xAxis * SPEED * FP.elapsed, velY * FP.elapsed);
-      if (y > gameWorld.height) die(2);
+      if (y > island.height) die(2);
       
       if (collide("barrier", x, y))
       {
@@ -160,9 +161,14 @@ package entities
             if (Player.id.inAir) score += 5;
           }
 
-          gameWorld.addScore(score, this);
+          island.enemyKilled(this, score);
         }  
       }
+    }
+    
+    public function pauseMap():void
+    {
+      map.active = !map.active;
     }
   }
 }
